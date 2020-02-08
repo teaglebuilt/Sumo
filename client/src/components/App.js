@@ -5,13 +5,16 @@ import Form from "./Form";
 import Chart from "./Chart";
 
 function App() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    labels: ["time"],
+    datasets: []
+  });
 
   const socket = socketIOClient(`http://localhost:8000`);
 
   useEffect(() => {
-    socket.on("incoming", data => setData(data));
-  }, [data, socket]);
+    socket.on("incoming", data => setData({ datasets: data.requests }));
+  }, [setData, socket]);
 
   return (
     <GlobalContext.Provider value={{ socket, data, setData }}>
