@@ -1,4 +1,4 @@
-import React, { useContext, useState, useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import GlobalContext from "../context/globalContext";
 
 const initialState = {
@@ -17,13 +17,15 @@ const reducer = (state, action) => {
       return { ...state, concurrency: state.concurrency + action.value };
     case "concurrency_down":
       return { ...state, concurrency: state.concurrency - action.value };
+    case "reset":
+      return initialState;
     default:
       return { ...state, [action.type]: action.value };
   }
 };
 
 const Form = () => {
-  const { socket, setData } = useContext(GlobalContext);
+  const { socket } = useContext(GlobalContext);
   const [formData, dispatch] = useReducer(reducer, initialState);
 
   const onChange = e => {
@@ -33,6 +35,7 @@ const Form = () => {
   const sendRequestData = data => {
     console.log(socket);
     socket.emit("outgoing", data);
+    dispatch({ type: "reset" });
   };
 
   const onSubmit = e => {

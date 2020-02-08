@@ -29,10 +29,13 @@ CORS(app)
 @socketio.on('outgoing')
 def execute(data):
     print(data)
-    time, request_dict = entrypoint(data["url"], int(
+    time, request_dict = entrypoint(data["host"], int(
         data["requests"]), int(data["concurrency"]))
-    print(time, request_dict)
-    emit('incoming', data, broadcast=True)
+    response = {
+        "time": time,
+        "requests": request_dict
+    }
+    emit('incoming', response, broadcast=True)
 
 
 def entrypoint(url, requests, concurrency):
