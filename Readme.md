@@ -1,5 +1,3 @@
-# Sumo
-
 <div align="center">
   <h1 style="margin-bottom: 0;">Sumo</h1>
   <div>
