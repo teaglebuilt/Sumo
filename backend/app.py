@@ -16,17 +16,6 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 CORS(app)
 
 
-# @socketio.on('connect')
-# def connect():
-#     print('connected')
-# while True:
-#     send_data = {
-#         'e': randrange
-#     }
-#     emit('draw', send_data)
-#     time.sleep(0.5)
-
-
 @socketio.on('outgoing')
 def execute(data):
     print(data)

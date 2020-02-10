@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  client:
+    container_name: frontend
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+
+  load_service:
+    image: load_service:latest
+    build:
+      context: ./backend
+      target: base
+    container_name: load_service
+    volumes:
+      - .:/src
+    ports:
+      - 5000:5000

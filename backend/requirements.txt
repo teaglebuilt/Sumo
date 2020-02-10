@@ -9,10 +9,12 @@ chardet==3.0.4            # via requests
 click==7.0                # via flask
 dnspython==1.16.0         # via eventlet
 eventlet==0.25.1
+flask-cors==3.0.8
 flask-socketio==4.2.1
 flask==1.1.1
 gevent==1.4.0
 greenlet==0.4.15
+gunicorn==20.0.4
 idna==2.8                 # via requests
 itsdangerous==1.1.0       # via flask
 jinja2==2.11.1            # via flask
@@ -21,6 +23,9 @@ monotonic==1.5            # via eventlet
 python-engineio==3.11.2   # via python-socketio
 python-socketio==4.4.0    # via flask-socketio
 requests==2.22.0
-six==1.14.0               # via eventlet, python-engineio, python-socketio
+six==1.14.0               # via eventlet, flask-cors, python-engineio, python-socketio
 urllib3==1.25.8           # via requests
 werkzeug==1.0.0           # via flask
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
