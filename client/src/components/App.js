@@ -7,6 +7,7 @@ import Metrics from "./Metrics";
 
 function App() {
   const [data, setData] = useState({});
+  const [metrics, setMetrics] = useState({});
 
   const socket = socketIOClient(`http://localhost:8000`);
 
@@ -23,10 +24,11 @@ function App() {
         ]
       })
     );
-  }, [data, setData, socket]);
+    socket.on("metrics", res => setMetrics(res));
+  }, [data, setData, socket, metrics, setMetrics]);
 
   return (
-    <GlobalContext.Provider value={{ socket, data, setData }}>
+    <GlobalContext.Provider value={{ socket, data, metrics }}>
       <div className="container w-full mx-auto pt-20">
         <div className="flex flex-row flex-wrap flex-grow mt-2">
           <div className="w-full md:w-1/2 p-3">

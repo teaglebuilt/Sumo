@@ -2,6 +2,7 @@ from flask import Flask, render_template, session, request, jsonify
 from flask_socketio import SocketIO, send, emit
 from flask_cors import CORS
 from random import randrange
+from calculate import Results
 import asyncio
 import requests
 import time
@@ -31,11 +32,21 @@ def execute(data):
     print(data)
     time, request_dict = entrypoint(data["host"], int(
         data["requests"]), int(data["concurrency"]))
+    results = Results(time, request_dict)
+    metrics = {
+        "total_time": time,
+        "slowest": results.slowest(),
+        "fastest": results.fastest(),
+        "average": results.average_time(),
+        "requests_per_min": results.requests_per_min(),
+        "requests_per_sec": results.requests_per_sec()
+    }
     response = {
         "time": time,
         "requests": request_dict
     }
     emit('incoming', response, broadcast=True)
+    emit('metrics', metrics, broadcast=True)
 
 
 def entrypoint(url, requests, concurrency):
