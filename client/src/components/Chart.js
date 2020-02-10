@@ -4,7 +4,6 @@ import GlobalContext from "../context/globalContext";
 
 const Chart = () => {
   const { data } = useContext(GlobalContext);
-
   return (
     <div class="bg-white border rounded shadow">
       <div class="border-b p-3">
