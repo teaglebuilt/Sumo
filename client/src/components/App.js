@@ -3,6 +3,7 @@ import socketIOClient from "socket.io-client";
 import GlobalContext from "../context/globalContext";
 import Form from "./Form";
 import Chart from "./Chart";
+import Metrics from "./Metrics";
 
 function App() {
   const [data, setData] = useState({});
@@ -27,13 +28,19 @@ function App() {
   return (
     <GlobalContext.Provider value={{ socket, data, setData }}>
       <div className="container w-full mx-auto pt-20">
-        <div class="flex flex-row flex-wrap flex-grow mt-2">
-          <div class="w-full md:w-1/2 p-3">
+        <div className="flex flex-row flex-wrap flex-grow mt-2">
+          <div className="w-full md:w-1/2 p-3">
             <Form />
           </div>
-          <div class="w-full md:w-1/2 p-3">
+          <div className="w-full md:w-1/2 p-3">
             <Chart />
           </div>
+        </div>
+
+        <hr className="border-b-2 border-gray-400 my-8 mx-4" />
+
+        <div className="w-full px-4 md:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
+          <Metrics />
         </div>
       </div>
     </GlobalContext.Provider>
