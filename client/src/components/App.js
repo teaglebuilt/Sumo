@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
+import { serverUrl, port } from "../config";
 import GlobalContext from "../context/globalContext";
 import Form from "./Form";
 import Chart from "./Chart";
@@ -9,7 +10,7 @@ function App() {
   const [data, setData] = useState({});
   const [metrics, setMetrics] = useState({});
 
-  const socket = socketIOClient(`http://localhost:8000`);
+  const socket = socketIOClient(`${serverUrl}:${port}`);
 
   useEffect(() => {
     socket.on("incoming", res =>
